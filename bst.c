@@ -165,9 +165,17 @@ int bst_height(struct bst* bst) {
 }
 
 int _bst_subtree_path_sum(int sum, struct bst_node* n) {
-  if (n == NULL) return (sum == 0);
+  if (n == NULL) return 0;
+
+  // Subtract current node value from sum
   sum -= n->val;
-  if (n->left == NULL && n->right == NULL) return (sum == 0);
+
+  // If it's a leaf node, check if sum == 0
+  if (n->left == NULL && n->right == NULL) {
+    return (sum == 0);
+  }
+
+  // Otherwise, continue searching in left and right subtrees
   return _bst_subtree_path_sum(sum, n->left) || _bst_subtree_path_sum(sum, n->right);
 }
 
